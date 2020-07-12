@@ -1,23 +1,39 @@
 package com.codegym.casestudy.models;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
+
 import javax.persistence.*;
-import java.util.Date;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Data
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
+    @Email
+    @NotEmpty
     private String email;
+
+    @NotEmpty
+    @Length(min = 4,max = 30)
+    private String fullName;
+
+    @URL
+    private String avaUrl;
+
+    @NotNull
+    @Length(min = 4,max = 30)
+    private String username;
+
+    @NotNull
+    @Length(min = 4,max = 30)
     private String password;
-    private Date registeredAt;
-    private Date lastLogin;
-    private String profile;
 }
