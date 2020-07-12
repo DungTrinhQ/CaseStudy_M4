@@ -1,4 +1,7 @@
 package com.codegym.casestudy.repositories;
 
-public class CommentRepository {
+import com.codegym.casestudy.models.Comment;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface CommentRepository extends PagingAndSortingRepository<Comment,Long> {
 }
