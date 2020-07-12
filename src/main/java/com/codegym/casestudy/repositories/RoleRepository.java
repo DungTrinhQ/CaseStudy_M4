@@ -1,4 +1,7 @@
 package com.codegym.casestudy.repositories;
 
-public class RoleRepository {
+import com.codegym.casestudy.models.Role;
+import org.springframework.data.repository.CrudRepository;
+
+public interface RoleRepository extends CrudRepository<Role, Long> {
 }
