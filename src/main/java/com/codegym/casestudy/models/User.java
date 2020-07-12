@@ -36,4 +36,8 @@ public class User {
     @NotNull
     @Length(min = 4,max = 30)
     private String password;
+
+    @NotNull
+    @ManyToOne
+    private Role role;
 }
