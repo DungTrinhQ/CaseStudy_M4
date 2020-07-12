@@ -1,4 +1,8 @@
 package com.codegym.casestudy.repositories;
 
-public class UserRepository {
+import com.codegym.casestudy.models.User;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface UserRepository extends PagingAndSortingRepository<User,Long> {
+    User findUserByUsername(String username);
 }
