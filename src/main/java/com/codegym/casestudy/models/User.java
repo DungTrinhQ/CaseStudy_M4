@@ -2,6 +2,7 @@ package com.codegym.casestudy.models;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +19,11 @@ public class User {
     private String phoneNumber;
     @Column(unique = true)
     private String email;
+    @Column(nullable = false)
     private String userName;
     private String password;
-    private Date registeredAt;
-    private Date lastLogin;
+    private Timestamp registeredAt;
+    private Timestamp lastLogin;
     private String avatar;
 
     @OneToOne
