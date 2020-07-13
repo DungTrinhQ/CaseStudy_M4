@@ -3,10 +3,11 @@ package com.codegym.casestudy.models;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
-@Table(name = "users")
+
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,5 +22,9 @@ public class User {
     private String password;
     private Date registeredAt;
     private Date lastLogin;
-    private String profile;
+    private String avatar;
+
+    @OneToOne
+    @JoinColumn(name = "permission_id")
+    private Role role;
 }

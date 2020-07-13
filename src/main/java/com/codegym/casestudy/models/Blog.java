@@ -4,19 +4,33 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Data
-@Table(name = "blogs")
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
     private String author;
     private Timestamp dateOfWriting;
-    private int likes;
-    private int categoryId;
-    private int tagId;
+//    private Integer likes;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "blog_tag")
+    private List<Tag> tags;
+
+//    @OneToMany
+//    private List<Comment> commentList;
 }

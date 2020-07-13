@@ -2,10 +2,8 @@ package com.codegym.casestudy.models;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,4 +12,8 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String keyWord;
+
+//    @ManyToMany(cascade = CascadeType.ALL)
+////    @JoinTable(name = "blog_tag")
+//    private List<Blog> blogs;
 }
