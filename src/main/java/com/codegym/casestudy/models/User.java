@@ -19,7 +19,7 @@ public class User {
     private String phoneNumber;
     @Column(unique = true)
     private String email;
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String userName;
     private String password;
     private Timestamp registeredAt;
