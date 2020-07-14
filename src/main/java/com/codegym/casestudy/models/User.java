@@ -1,11 +1,13 @@
 package com.codegym.casestudy.models;
 
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-
 @Entity
 @Data
 
@@ -19,13 +21,16 @@ public class User {
     private String phoneNumber;
     @Column(unique = true)
     private String email;
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String userName;
     private String password;
     private Timestamp registeredAt;
     private Timestamp lastLogin;
     private String avatar;
 
+    public User() {
+        this.registeredAt = new Timestamp(System.currentTimeMillis());
+    }
     @OneToOne
     @JoinColumn(name = "permission_id")
     private Role role;
