@@ -1,7 +1,6 @@
 package com.codegym.casestudy.services.impl;
 
 import com.codegym.casestudy.models.User;
-import com.codegym.casestudy.repositories.UserRepository;
 import com.codegym.casestudy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
