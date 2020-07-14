@@ -1,23 +1,55 @@
 package com.codegym.casestudy.models;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
-import java.util.Date;
+import java.util.List;
 
 @Entity
-@Data
-@Table(name = "users")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private String email;
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String username;
+
+    @JsonIgnore
     private String password;
-    private Date registeredAt;
-    private Date lastLogin;
-    private String profile;
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private List<Role> roles;
+
+    public User() {}
+
+    public User(String username, String password, List<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
