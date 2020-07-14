@@ -1,55 +1,35 @@
 package com.codegym.casestudy.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Entity
+@Data
+
 public class User {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String username;
 
-    @JsonIgnore
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    @Column(unique = true)
+    private String email;
+    @Column(nullable = false,unique = true)
+    private String userName;
     private String password;
-    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    private List<Role> roles;
+    private Timestamp registeredAt;
+    private Timestamp lastLogin;
+    private String avatar;
 
-    public User() {}
-
-    public User(String username, String password, List<Role> roles) {
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
+    public User() {
+        this.registeredAt = new Timestamp(System.currentTimeMillis());
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Long getId() {
-        return id;
-    }
+    @OneToOne
+    @JoinColumn(name = "permission_id")
+    private Role role;
 }

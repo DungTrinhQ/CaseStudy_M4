@@ -1,26 +1,21 @@
 package com.codegym.casestudy.controllers;
 
+import com.codegym.casestudy.service.IBlogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 @Controller
 public class HomeController {
-    @GetMapping(value="/")
-    public String index(){
-        return "index";
+    @Autowired
+    private IBlogService blogService;
+    @GetMapping("")
+    public ModelAndView getHome() {
+        ModelAndView mv = new ModelAndView("home");
+        mv.addObject("blogs",blogService.findAllByDateDesc());
+        return mv;
     }
 
-    @GetMapping(value="/registration")
-    public String register(){
-        return "register";
-    }
 
-    @GetMapping(value="/login")
-    public String login(){
-        return "login";
-    }
-
-    @GetMapping(value="post/{id}")
-    public String singlePost(){
-        return "post";
-    }
 }

@@ -1,27 +1,15 @@
 package com.codegym.casestudy.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
+
 @Entity
+@Data
 public class Role {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    String name;
-
-    public Role() {}
-
-    public Role(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String permission;
 
 }

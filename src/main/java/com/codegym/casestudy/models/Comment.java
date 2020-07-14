@@ -1,62 +1,23 @@
 package com.codegym.casestudy.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Entity
+@Data
 public class Comment {
     @Id
-    @GeneratedValue
-    private Long Id;
-
-    private String text;
-
-    @ManyToOne
-    private Post post;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(columnDefinition = "TEXT")
+    private String content;
 
     @ManyToOne
-    private User creator;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public Comment() {
-    }
-
-    public Comment(String text, Post post, User creator) {
-        this.text = text;
-        this.post = post;
-        this.creator = creator;
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
-
-    public User getCreator() {
-        return creator;
-    }
-
-    public void setCreator(User creator) {
-        this.creator = creator;
-    }
-
+    @ManyToOne
+    @JoinColumn(name = "blog_id")
+    private Blog blog;
 }
-
