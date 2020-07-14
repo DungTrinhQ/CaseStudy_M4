@@ -3,6 +3,7 @@ package com.codegym.casestudy.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +17,11 @@ public class Blog {
     private String title;
     @Column(columnDefinition = "LONGTEXT",nullable = false)
     private String content;
-    private Date dateOfWriting;
+    private Timestamp postTime;
 //    private Integer likes;
+    public Blog() {
+        this.postTime = new Timestamp(System.currentTimeMillis());
+    }
 
     @ManyToOne
     @JoinColumn(name = "category_id",nullable = false)

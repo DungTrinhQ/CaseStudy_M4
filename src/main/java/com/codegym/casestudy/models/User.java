@@ -26,6 +26,9 @@ public class User {
     private Timestamp lastLogin;
     private String avatar;
 
+    public User() {
+        this.registeredAt = new Timestamp(System.currentTimeMillis());
+    }
     @OneToOne
     @JoinColumn(name = "permission_id")
     private Role role;
