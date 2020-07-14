@@ -13,7 +13,7 @@ public class HomeController {
     @GetMapping("")
     public ModelAndView getHome() {
         ModelAndView mv = new ModelAndView("home");
-        mv.addObject("blogs",blogService.findAll());
+        mv.addObject("blogs",blogService.findAllByDateDesc());
         return mv;
     }
 

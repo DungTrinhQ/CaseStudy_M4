@@ -34,4 +34,9 @@ public class BlogServiceImpl implements IBlogService {
         blogRepository.delete(blog);
         return blog;
     }
+
+    @Override
+    public Iterable<Blog> findAllByDateDesc() {
+        return blogRepository.findAllByDateDesc();
+    }
 }

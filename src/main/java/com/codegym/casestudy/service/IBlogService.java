@@ -9,4 +9,5 @@ public interface IBlogService {
     Blog findOne(Long id);
     Blog createBlog(Blog blog);
     Blog delete(Long id);
+    Iterable<Blog> findAllByDateDesc();
 }
