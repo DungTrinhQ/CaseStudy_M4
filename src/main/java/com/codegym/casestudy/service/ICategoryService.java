@@ -1,7 +1,6 @@
 package com.codegym.casestudy.service;
 
 import com.codegym.casestudy.models.Category;
-import com.codegym.casestudy.models.User;
 
 import java.util.List;
 

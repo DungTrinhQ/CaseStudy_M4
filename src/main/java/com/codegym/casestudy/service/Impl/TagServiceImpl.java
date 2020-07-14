@@ -4,9 +4,11 @@ import com.codegym.casestudy.models.Tag;
 import com.codegym.casestudy.repositories.ITagRepository;
 import com.codegym.casestudy.service.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TagServiceImpl implements ITagService {
     @Autowired
     private ITagRepository tagRepository;

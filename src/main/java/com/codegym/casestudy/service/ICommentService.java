@@ -1,7 +1,6 @@
 package com.codegym.casestudy.service;
 
 import com.codegym.casestudy.models.Comment;
-
 import java.util.List;
 
 public interface ICommentService {

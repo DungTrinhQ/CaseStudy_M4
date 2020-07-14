@@ -3,7 +3,7 @@ package com.codegym.casestudy.models;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,12 +16,11 @@ public class Blog {
     private String title;
     @Column(columnDefinition = "LONGTEXT",nullable = false)
     private String content;
-    private String author;
-    private Timestamp dateOfWriting;
+    private Date dateOfWriting;
 //    private Integer likes;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id",nullable = false)
     private Category category;
 
     @ManyToOne
@@ -29,6 +28,5 @@ public class Blog {
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "blog_tag")
     private List<Tag> tags;
 }

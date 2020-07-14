@@ -4,9 +4,11 @@ import com.codegym.casestudy.models.Blog;
 import com.codegym.casestudy.repositories.IBlogRepository;
 import com.codegym.casestudy.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BlogServiceImpl implements IBlogService {
     @Autowired
     private IBlogRepository blogRepository;

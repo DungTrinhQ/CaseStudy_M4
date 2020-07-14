@@ -4,9 +4,11 @@ import com.codegym.casestudy.models.Comment;
 import com.codegym.casestudy.repositories.ICommentRepository;
 import com.codegym.casestudy.service.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CommentServiceImpl implements ICommentService {
     @Autowired
     private ICommentRepository commentRepository;
