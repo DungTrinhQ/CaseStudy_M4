@@ -22,7 +22,6 @@
 <body>
 
 <div class="site-wrap">
-
     <div class="site-mobile-menu">
         <div class="site-mobile-menu-header">
             <div class="site-mobile-menu-close mt-3">
@@ -59,13 +58,12 @@
                             <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search"></span></a></li>
                         </ul>
                     </nav>
-                    <a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3"></span></a></div>
+                    <a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3"></span></a>
+                </div>
             </div>
 
         </div>
     </header>
-
-
     <div class="site-section bg-light">
         <div class="container">
             <div class="row align-items-stretch retro-layout-2">
@@ -126,7 +124,7 @@
                                 <span th:text="${#dates.format(blog.postTime, 'dd-MM-yyyy')}"></span>
                             </div>
 
-                            <p th:text="${blog.content}"></p>
+                            <p th:utext="${blog.content}"></p>
                             <p><a th:href="@{blog/__${blog.id}__}">Read More</a></p>
                         </div>
                     </div>
@@ -146,55 +144,6 @@
             </div>
         </div>
     </div>
-
-<!--    <div class="site-section bg-light">-->
-<!--        <div class="container">-->
-
-<!--            <div class="row align-items-stretch retro-layout">-->
-
-<!--                <div class="col-md-5 order-md-2">-->
-<!--                    <a href="single.html" class="hentry img-1 h-100 gradient" style="background-image: url('/assets/images/img_4.jpg');">-->
-<!--                        <span class="post-category text-white bg-danger">Travel</span>-->
-<!--                        <div class="text">-->
-<!--                            <h2>The 20 Biggest Fintech Companies In America 2019</h2>-->
-<!--                            <span>February 12, 2019</span>-->
-<!--                        </div>-->
-<!--                    </a>-->
-<!--                </div>-->
-
-<!--                <div class="col-md-7">-->
-
-<!--                    <a href="single.html" class="hentry img-2 v-height mb30 gradient" style="background-image: url('/assets/images/img_1.jpg');">-->
-<!--                        <span class="post-category text-white bg-success">Nature</span>-->
-<!--                        <div class="text text-sm">-->
-<!--                            <h2>The 20 Biggest Fintech Companies In America 2019</h2>-->
-<!--                            <span>February 12, 2019</span>-->
-<!--                        </div>-->
-<!--                    </a>-->
-
-<!--                    <div class="two-col d-block d-md-flex">-->
-<!--                        <a href="single.html" class="hentry v-height img-2 gradient" style="background-image: url('/assets/images/img_2.jpg');">-->
-<!--                            <span class="post-category text-white bg-primary">Sports</span>-->
-<!--                            <div class="text text-sm">-->
-<!--                                <h2>The 20 Biggest Fintech Companies In America 2019</h2>-->
-<!--                                <span>February 12, 2019</span>-->
-<!--                            </div>-->
-<!--                        </a>-->
-<!--                        <a href="single.html" class="hentry v-height img-2 ml-auto gradient" style="background-image: url('/assets/images/img_3.jpg');">-->
-<!--                            <span class="post-category text-white bg-warning">Lifestyle</span>-->
-<!--                            <div class="text text-sm">-->
-<!--                                <h2>The 20 Biggest Fintech Companies In America 2019</h2>-->
-<!--                                <span>February 12, 2019</span>-->
-<!--                            </div>-->
-<!--                        </a>-->
-<!--                    </div>-->
-
-<!--                </div>-->
-<!--            </div>-->
-
-<!--        </div>-->
-<!--    </div>-->
-
 
     <div class="site-section bg-lightx">
         <div class="container">
