@@ -8,6 +8,8 @@ import javax.validation.constraints.Email;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 @Data
 
@@ -31,7 +33,11 @@ public class User {
     public User() {
         this.registeredAt = new Timestamp(System.currentTimeMillis());
     }
-    @OneToOne
-    @JoinColumn(name = "permission_id")
-    private Role role;
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
 }
