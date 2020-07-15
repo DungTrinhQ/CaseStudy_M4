@@ -1,16 +1,28 @@
 package com.codegym.casestudy.controllers;
 
+import com.codegym.casestudy.models.Blog;
+import com.codegym.casestudy.models.User;
+import com.codegym.casestudy.service.IBlogService;
+import com.codegym.casestudy.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class SecurityController {
+
+    @Autowired
+    IUserService userService;
+
+    @Autowired
+    IBlogService blogService;
 
     private String getPrincipal(){
         String userName = null;
@@ -29,11 +41,12 @@ public class SecurityController {
         return "login";
     }
 
-    @GetMapping(value = {"/", "/home"})
-    public String Homepage(Model model){
-        model.addAttribute("user", getPrincipal());
-        return "welcome";
-    }
+
+//    @GetMapping(value = {"/", "/home"})
+//    public String Homepage(Model model){
+//        model.addAttribute("user", getPrincipal());
+//        return "welcome";
+//    }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {

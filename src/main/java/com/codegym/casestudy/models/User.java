@@ -54,7 +54,6 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
     private List<Role> roles;
 
-
     public List<Role> getRoles() {
         return roles;
     }
@@ -62,6 +61,7 @@ public class User implements Serializable {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
-
-
+//    @ManyToOne
+//    @JoinColumn(name = "permission_id")
+//    private Role role;
 }

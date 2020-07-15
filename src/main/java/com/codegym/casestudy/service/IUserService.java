@@ -9,4 +9,5 @@ public interface IUserService {
     User findOne(Long id);
     User createUser(User user);
     User delete(Long id);
+    User findUserByUsername(String username);
 }

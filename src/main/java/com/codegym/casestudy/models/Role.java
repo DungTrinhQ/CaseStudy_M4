@@ -1,6 +1,7 @@
 package com.codegym.casestudy.models;
 
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Role implements Serializable {
+public class Role implements Serializable, GrantedAuthority {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,4 +35,8 @@ public class Role implements Serializable {
         this.users = users;
     }
 
+    @Override
+    public String getAuthority() {
+        return this.permission;
+    }
 }
