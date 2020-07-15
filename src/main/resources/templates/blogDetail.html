@@ -149,17 +149,19 @@
           <!--              </div>-->
           <!--            </div>-->
           <!--          </div>-->
-
+          <a th:href="@{/blog/edit/__${blogs.id}__}" class="btn btn-secondary">Sửa</a>
+          <a href="#" class="btn btn-danger">Xoá</a>
 
           <div class="pt-5">
             <h3 class="mb-5" id="commentTotal">Comments</h3>
             <ul class="comment-list" id="CommentLists">
             </ul>
-            <!-- END comment-list -->
+             END comment-list
 
             <div class="comment-form-wrap pt-2">
               <h3 class="mb-5">Comment</h3>
               <form action="" class="p-3 bg-light">
+
                 <div class="form-group">
                   <label for="message"></label>
                   <textarea name="" id="message" cols="30" rows="8" class="form-control" placeholder="Bạn muốn nói gì..."></textarea>
@@ -366,7 +368,7 @@
     let comment = {
       content: content,
       user: {
-        id: 4
+        id: 13
       },
       blog: {
         id: getBlogId()
