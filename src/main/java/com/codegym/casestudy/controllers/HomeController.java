@@ -17,6 +17,7 @@ public class HomeController {
     public ModelAndView getHome() {
         ModelAndView mv = new ModelAndView("home");
         mv.addObject("blogs",blogService.findAllByDateDesc());
+        mv.addObject("categories", categoryService.findAll());
         return mv;
     }
 

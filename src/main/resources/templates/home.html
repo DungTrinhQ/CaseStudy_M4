@@ -67,40 +67,40 @@
     <div class="site-section bg-light">
         <div class="container">
             <div class="row align-items-stretch retro-layout-2">
-                <div class="col-md-4" th:object="${blogs}">
-                    <a th:href="@{/blog/category}" class="h-entry mb-30 v-height gradient" style="background-image: url('/assets/images/img_travel.jpg');">
+                <div class="col-md-3" th:each="c : ${categories}">
+                    <a th:href="@{/blog/category/__${c.id}__}" class="h-entry mb-30 v-height gradient" style="background-image: url('/assets/images/img_travel.jpg');">
                         <div class="text">
                             <div class="post-categories mb-3">
-                                <span class="post-category bg-danger">Travel</span>
+                                <span class="post-category bg-danger" th:text="${c.theme}"></span>
                             </div>
                             <h2>The AI magically removes moving objects from videos.</h2>
                             <span class="date">July 19, 2019</span>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-4">
-                    <a href="#" class="h-entry img-2 h-100 gradient" style="background-image: url('/assets/images/img_food.jpg');">
-                        <div class="text">
-                            <div class="post-categories mb-3">
-                                <span class="post-category bg-primary">Food</span>
-                            </div>
-                            <h2>The AI magically removes moving objects from videos.</h2>
-                            <span class="date">July 19, 2019</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="#" class="h-entry mb-30 v-height gradient" style="background-image: url('/assets/images/img_6.jpg');">
-                        <div class="text">
-                            <div class="post-categories mb-3">
-                                <span class="post-category bg-success">Ký sự checker</span>
-                            </div>
-                            <h2>The 20 Biggest Fintech Companies In America 2019</h2>
-                            <span class="date">July 19, 2019</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
+<!--                <div class="col-md-4">-->
+<!--                    <a href="#" class="h-entry img-2 h-100 gradient" style="background-image: url('/assets/images/img_food.jpg');">-->
+<!--                        <div class="text">-->
+<!--                            <div class="post-categories mb-3">-->
+<!--                                <span class="post-category bg-primary">Food</span>-->
+<!--                            </div>-->
+<!--                            <h2>The AI magically removes moving objects from videos.</h2>-->
+<!--                            <span class="date">July 19, 2019</span>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="col-md-4">-->
+<!--                    <a href="#" class="h-entry mb-30 v-height gradient" style="background-image: url('/assets/images/img_6.jpg');">-->
+<!--                        <div class="text">-->
+<!--                            <div class="post-categories mb-3">-->
+<!--                                <span class="post-category bg-success">Ký sự checker</span>-->
+<!--                            </div>-->
+<!--                            <h2>The 20 Biggest Fintech Companies In America 2019</h2>-->
+<!--                            <span class="date">July 19, 2019</span>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 
