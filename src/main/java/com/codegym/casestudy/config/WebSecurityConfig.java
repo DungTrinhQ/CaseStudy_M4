@@ -11,39 +11,51 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsService customUserDetailsService;
+
+    @Autowired
+    CustomSuccessHandler customSuccessHandler;
+
+    @Autowired
+    private DataSource dataSource;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(customUserDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/").hasRole("MEMBER")
-                .antMatchers("/admin").hasRole("ADMIN")
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .usernameParameter("user_name")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/")
-                .failureUrl("/login?error")
-                .and()
-                .exceptionHandling()
-                .accessDeniedPage("/403");
+        http.authorizeRequests()
+                .antMatchers("/", "/home").access("hasRole('USER')")
+                .antMatchers("/admin/**").access("hasRole('ADMIN')")
+                .antMatchers("/dba/**").access("hasRole('ADMIN') and hasRole('DBA')")
+                .and().formLogin().successHandler(customSuccessHandler)
+                .usernameParameter("userName").passwordParameter("password")
+                .and().csrf()
+                .and().exceptionHandling().accessDeniedPage("/Access_Denied")
+                .and().formLogin().loginPage("/login");
+    }
+
+    PersistentTokenRepository persistentTokenRepository(){
+        JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();
+        tokenRepositoryImpl.setDataSource(dataSource);
+        return tokenRepositoryImpl;
     }
 }

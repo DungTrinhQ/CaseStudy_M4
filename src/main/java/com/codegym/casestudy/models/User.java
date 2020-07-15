@@ -42,6 +42,7 @@ public class User implements Serializable {
     private Timestamp lastLogin;
     private String avatar;
 
+
     public User() {
         this.registeredAt = new Timestamp(System.currentTimeMillis());
     }
@@ -61,4 +62,6 @@ public class User implements Serializable {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+
 }

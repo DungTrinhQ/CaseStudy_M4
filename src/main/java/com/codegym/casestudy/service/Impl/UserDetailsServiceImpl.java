@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -23,13 +24,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findUserByUserName(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        Set<Role> roles = user.getRoles();
+        List<Role> roles = user.getRoles();
         for (Role role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getPermission()));
         }
