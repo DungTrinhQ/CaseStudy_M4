@@ -62,10 +62,10 @@ public class BlogController {
         return mv;
     }
 
-    @GetMapping("/blog/category/{category}")
-    public ModelAndView getSearchBlogByCategory(@PathVariable("category") Long category_Id) {
+    @GetMapping("/blog/category/{category_id}")
+    public ModelAndView getSearchBlogByCategory(@PathVariable("category_id") Long category_id) {
         ModelAndView mv = new ModelAndView("home");
-        Iterable<Blog> blogs = (Iterable) blogService.findAllByCategoryContainingOrderByPostTimeDesc(category_Id);
+        Iterable<Blog> blogs = (Iterable) blogService.findAllByCategoryContainingOrderByPostTimeDesc(category_id);
         mv.addObject("blogs", blogs);
         return mv;
     }

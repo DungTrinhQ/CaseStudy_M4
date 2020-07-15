@@ -47,6 +47,6 @@ public class BlogServiceImpl implements IBlogService {
 
     @Override
     public Iterable<Blog> findAllByCategoryContainingOrderByPostTimeDesc(Long id) {
-        return blogRepository.findAllByCategoryContainingOrderByPostTimeDesc(id);
+        return blogRepository.findAllByCategory_IdOrderByPostTimeDesc(id);
     }
 }

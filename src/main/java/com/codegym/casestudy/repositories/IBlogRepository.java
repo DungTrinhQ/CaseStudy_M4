@@ -11,5 +11,5 @@ public interface IBlogRepository extends JpaRepository<Blog,Long> {
     @Query(value = "SELECT * FROM blog ORDER BY post_time DESC", nativeQuery = true)
     Iterable<Blog> findAllByDateDesc();
     Iterable<Blog> findAllByTitleContainingOrderByPostTimeDesc(String keyWord);
-    Iterable<Blog> findAllByCategoryContainingOrderByPostTimeDesc(Long id);
+    Iterable<Blog> findAllByCategory_IdOrderByPostTimeDesc(Long id);
 }
