@@ -3,6 +3,7 @@ package com.codegym.casestudy.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
@@ -12,7 +13,8 @@ public class Comment {
     private Long id;
     @Column(columnDefinition = "TEXT")
     private String content;
-    private String likes;
+    private Long likes;
+    private Date commentTime;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
