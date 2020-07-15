@@ -10,4 +10,5 @@ public interface ICommentService {
     Comment createComment(Comment comment);
     Comment delete(Long id);
     Comment save(Comment comment);
+    List<Comment> findAllByBlogId(Long blogId);
 }

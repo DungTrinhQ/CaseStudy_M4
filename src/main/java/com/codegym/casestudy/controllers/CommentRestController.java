@@ -8,18 +8,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/comments")
+@RequestMapping()
 public class CommentRestController {
     @Autowired
     private ICommentService iCommentService;
 
-    @GetMapping("")
+    @GetMapping("/api/comments")
     public List<Comment> getAllComment(){return (List<Comment>) iCommentService.findAll();}
-    @PostMapping("")
+    @PostMapping("/api/comments")
     public Comment createComment(@RequestBody Comment comment){
         return iCommentService.save(comment);
     }
 
+    @GetMapping("/api/comments/{blogId}")
+    public List<Comment> getAllComment(@PathVariable  Long blogId){return iCommentService.findAllByBlogId(blogId);}
 
 
 }
