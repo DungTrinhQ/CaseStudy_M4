@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
     @Autowired
     private IBlogService blogService;
+
     @GetMapping("")
     public ModelAndView getHome() {
         ModelAndView mv = new ModelAndView("home");

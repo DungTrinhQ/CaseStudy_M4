@@ -41,6 +41,11 @@ public class SecurityController {
         return "login";
     }
 
+//    @PostMapping("/login")
+//    public String login(){
+//
+//    }
+
 
 //    @GetMapping(value = {"/", "/home"})
 //    public String Homepage(Model model){
@@ -60,10 +65,6 @@ public class SecurityController {
         return "accessDenied";
     }
 
-    @RequestMapping(value = "/dba", method = RequestMethod.GET)
-    public String dbaPage(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        return "dba";
-    }
+
 
 }
