@@ -36,14 +36,14 @@
             <div class="row align-items-center">
 
                 <div class="col-12 search-form-wrap js-search-form">
-                    <form method="get" action="#">
-                        <input type="text" id="s" class="form-control" placeholder="Search...">
+                    <form method="get" th:action="@{/searchBlog}">
+                        <input type="text" id="s" class="form-control" placeholder="Search..." name="keyWord">
                         <button class="search-btn" type="submit"><span class="icon-search"></span></button>
                     </form>
                 </div>
 
                 <div class="col-4 site-logo">
-                    <a href="index.html" class="text-black h2 mb-0">Mini Blog</a>
+                    <a href="/" class="text-black h2 mb-0">Mini Blog</a>
                 </div>
 
                 <div class="col-8 text-right">
@@ -90,10 +90,10 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <a href="#" class="h-entry mb-30 v-height gradient" style="background-image: url('/assets/images/img_5.jpg');">
+                    <a href="#" class="h-entry mb-30 v-height gradient" style="background-image: url('/assets/images/img_6.jpg');">
                         <div class="text">
                             <div class="post-categories mb-3">
-                                <span class="post-category bg-success">Food</span>
+                                <span class="post-category bg-success">Ký sự checker</span>
                             </div>
                             <h2>The 20 Biggest Fintech Companies In America 2019</h2>
                             <span class="date">July 19, 2019</span>
