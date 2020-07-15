@@ -2,24 +2,28 @@ package com.codegym.casestudy.controllers;
 
 import com.codegym.casestudy.models.Blog;
 import com.codegym.casestudy.service.IBlogService;
+import com.codegym.casestudy.service.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class BlogController {
     @Autowired
     private IBlogService blogService;
+    @Autowired
+    private ICommentService icommentService;
     @GetMapping("/blog/{id}")
     public ModelAndView getBlogDetail(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("blogDetail");
         mv.addObject("blogs",blogService.findOne(id));
+//        mv.addObject("comments",commentService.findAll());
+        // phải get them cả list cmt trong DB theo ID blog. r add vào object Mv
+        //mv.addObject("comments");
         return mv;
     }
+
+
     @GetMapping("/blogCategory")
     public String getCategoryBlog() {
         return "category";
@@ -38,4 +42,5 @@ public class BlogController {
         mv.addObject("message","New Post created successfully");
         return mv;
     }
+
 }

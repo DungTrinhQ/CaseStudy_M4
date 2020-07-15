@@ -12,10 +12,17 @@ import java.util.List;
 public class CommentServiceImpl implements ICommentService {
     @Autowired
     private ICommentRepository commentRepository;
+
     @Override
     public List<Comment> findAll() {
-        return (List<Comment>)commentRepository.findAll();
+        return (List<Comment>) commentRepository.findAll();
     }
+
+    @Override
+    public List<Comment> findAllByBlog() {
+        return (List<Comment>) commentRepository.findAll();
+    }
+
 
     @Override
     public Comment findOne(Long id) {
@@ -31,6 +38,12 @@ public class CommentServiceImpl implements ICommentService {
     public Comment delete(Long id) {
         Comment comment = commentRepository.findById(id).orElse(null);
         commentRepository.delete(comment);
+        return comment;
+    }
+
+    @Override
+    public Comment save(Comment comment) {
+        commentRepository.save(comment);
         return comment;
     }
 }

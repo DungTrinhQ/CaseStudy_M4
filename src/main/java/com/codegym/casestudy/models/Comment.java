@@ -12,6 +12,7 @@ public class Comment {
     private Long id;
     @Column(columnDefinition = "TEXT")
     private String content;
+    private String likes;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

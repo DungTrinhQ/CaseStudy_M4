@@ -24,7 +24,7 @@ public class UserController {
     public ModelAndView save(@ModelAttribute("user") User user) {
         userService.createUser(user);
         ModelAndView mv = new ModelAndView("signUp");
-        mv.addObject("message","Đăng ký thành công!!");
+        mv.addObject("message","Đăng ký thành công");
         return mv;
     }
 }
