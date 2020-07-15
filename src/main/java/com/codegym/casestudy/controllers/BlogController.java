@@ -22,7 +22,7 @@ public class BlogController {
     @GetMapping("/blog/{id}")
     public ModelAndView getBlogDetail(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("blogDetail");
-        mv.addObject("blogs", blogService.findOne(id));
+        mv.addObject("blogs",blogService.findOne(id));
         return mv;
     }
 
@@ -42,7 +42,7 @@ public class BlogController {
     public ModelAndView save(@ModelAttribute("blog") Blog blog) {
         blogService.createBlog(blog);
         ModelAndView mv = new ModelAndView("form-Post");
-        mv.addObject("message", "New Post created successfully");
+        mv.addObject("message","New Post created successfully");
         return mv;
     }
 

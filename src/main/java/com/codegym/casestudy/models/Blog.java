@@ -33,4 +33,5 @@ public class Blog {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Tag> tags;
+
 }
