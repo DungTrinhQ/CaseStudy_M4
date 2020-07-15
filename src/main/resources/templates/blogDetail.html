@@ -91,7 +91,8 @@
           <div class="col-md-12 col-lg-8 main-content">
             
             <div class="post-content-body">
-              <p th:utext="${blogs.content}" style="color: black"></p>
+              <article th:utext="${blogs.content}" style="color: black"></article>
+              <input type="hidden" id="blogId" th:value="${blogs.id}"/>
             <div class="row mb-5 mt-5">
               <div class="col-md-12 mb-4">
                 <img src="/assets/images/img_1.jpg" alt="Image placeholder" class="img-fluid rounded">
@@ -103,6 +104,8 @@
                 <img src="/assets/images/img_3.jpg" alt="Image placeholder" class="img-fluid rounded">
               </div>
             </div>
+              <a th:href="@{/blog/edit/__${blogs.id}__}" class="btn btn-secondary">Sửa</a>
+              <a href="#" class="btn btn-danger">Xoá</a>
 <!--            <p>Quibusdam autem, quas molestias recusandae aperiam molestiae modi qui ipsam vel. Placeat tenetur veritatis tempore quos impedit dicta, error autem, quae sint inventore ipsa quidem. Quo voluptate quisquam reiciendis, minus, animi minima eum officia doloremque repellat eos, odio doloribus cum.</p>-->
 <!--            <p>Temporibus quo dolore veritatis doloribus delectus dolores perspiciatis recusandae ducimus, nisi quod, incidunt ut quaerat, magnam cupiditate. Aut, laboriosam magnam, nobis dolore fugiat impedit necessitatibus nisi cupiditate, quas repellat itaque molestias sit libero voluptas eveniet omnis illo ullam dolorem minima.</p>-->
 <!--            <p>Porro amet accusantium libero fugit totam, deserunt ipsa, dolorem, vero expedita illo similique saepe nisi deleniti. Cumque, laboriosam, porro! Facilis voluptatem sequi nulla quidem, provident eius quos pariatur maxime sapiente illo nostrum quibusdam aliquid fugiat! Earum quod fuga id officia.</p>-->
@@ -113,7 +116,7 @@
 
             
             <div class="pt-5">
-              <p>Categories:  <a href="#" th:text="${blogs.category.theme}"></a> Tags: <a href="#">#manila</a>, <a href="#">#asia</a></p>
+              <p>Categories: <a href="#" th:text="${blogs.category.theme}"></a> Tags: <a href="#">#manila</a>, <a href="#">#asia</a></p>
             </div>
 
 

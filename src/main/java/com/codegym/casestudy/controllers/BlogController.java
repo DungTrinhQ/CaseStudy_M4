@@ -45,4 +45,11 @@ public class BlogController {
         mv.addObject("blogs",blogs);
         return mv;
     }
+    @GetMapping("/blog/edit/{id}")
+    public ModelAndView getEditBlog(@PathVariable Long id) {
+        Blog blog = blogService.findOne(id);
+        ModelAndView mv = new ModelAndView("form-Post");
+        mv.addObject("blog",blog);
+        return mv;
+    }
 }
