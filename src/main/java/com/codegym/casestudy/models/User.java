@@ -5,6 +5,8 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -22,11 +24,20 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    @Column(unique = true)
+
+    @Column(nullable = false, unique = false)
+    @NotEmpty
+    @Email(message = "{errors.invalid_email}")
     private String email;
-    @Column(nullable = false,unique = true)
+
+    @Column(nullable = false, unique = true)
     private String userName;
+
+    @Column(nullable = false)
+    @NotEmpty
+    @Size(min = 4)
     private String password;
+
     private Timestamp registeredAt;
     private Timestamp lastLogin;
     private String avatar;
@@ -34,19 +45,20 @@ public class User implements Serializable {
     public User() {
         this.registeredAt = new Timestamp(System.currentTimeMillis());
     }
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles;
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
+    private List<Role> roles;
 
-    public Set<Role> getRoles() {
+
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }
