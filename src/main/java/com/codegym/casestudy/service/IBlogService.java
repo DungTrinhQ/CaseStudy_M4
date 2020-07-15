@@ -12,4 +12,5 @@ public interface IBlogService {
     Blog delete(Long id);
     Iterable<Blog> findAllByDateDesc();
     Iterable<Blog> findAllByTitleLike(String keyWord);
+    Iterable<Blog> findAllByCategoryContainingOrderByPostTimeDesc(Long id);
 }

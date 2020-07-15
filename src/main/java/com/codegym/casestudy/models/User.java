@@ -29,7 +29,9 @@ public class User {
     public User() {
         this.registeredAt = new Timestamp(System.currentTimeMillis());
     }
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "permission_id")
     private Role role;
+
 }

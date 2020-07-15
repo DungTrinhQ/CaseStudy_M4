@@ -44,4 +44,9 @@ public class BlogServiceImpl implements IBlogService {
     public Iterable<Blog> findAllByTitleLike(String keyWord) {
         return blogRepository.findAllByTitleContainingOrderByPostTimeDesc(keyWord);
     }
+
+    @Override
+    public Iterable<Blog> findAllByCategoryContainingOrderByPostTimeDesc(Long id) {
+        return blogRepository.findAllByCategoryContainingOrderByPostTimeDesc(id);
+    }
 }
