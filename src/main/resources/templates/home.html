@@ -68,7 +68,7 @@
         <div class="container">
             <div class="row align-items-stretch retro-layout-2">
                 <div class="col-md-3" th:each="c : ${categories}">
-                    <a th:href="@{/blog/category/__${c.id}__}" class="h-entry mb-30 v-height gradient" style="background-image: url('/assets/images/img_travel.jpg');">
+                    <a th:href="@{/blog/category/__${c.id}__}" class="h-entry mb-30 v-height gradient"><img th:src="${c.avatar}" width="280" height="280">
                         <div class="text">
                             <div class="post-categories mb-3">
                                 <span class="post-category bg-danger" th:text="${c.theme}"></span>
