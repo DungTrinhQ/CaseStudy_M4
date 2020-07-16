@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -32,5 +33,10 @@ public class UserServiceImpl implements IUserService {
         User user = userRepository.findById(id).orElse(null);
         userRepository.delete(user);
         return user;
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUserName(username);
     }
 }
