@@ -1,6 +1,8 @@
 package com.codegym.casestudy.models;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -8,7 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

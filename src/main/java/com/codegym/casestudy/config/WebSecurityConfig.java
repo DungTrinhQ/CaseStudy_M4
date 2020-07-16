@@ -51,8 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**").access("hasRole('USER')")
                 .and().formLogin().successHandler(customSuccessHandler)
                 .usernameParameter("userName").passwordParameter("password")
-                .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/Access_Denied")
+                .and().csrf().disable()
+                .exceptionHandling().accessDeniedPage("/Access_Denied")
                 .and().formLogin().loginPage("/login")
                 .and().logout().logoutRequestMatcher((new AntPathRequestMatcher("/logout")));
     }

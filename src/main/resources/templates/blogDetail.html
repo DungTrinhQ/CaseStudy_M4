@@ -78,7 +78,7 @@
             <h1 class="mb-4" th:text="${blogs.title}"></h1>
             <div class="post-meta align-items-center text-center">
               <figure class="author-figure mb-0 mr-3 d-inline-block"><img src="/assets/images/person_1.jpg" alt="Image" class="img-fluid"></figure>
-              <span class="d-inline-block mt-1">By Carrol Atkinson</span>
+              <span class="d-inline-block mt-1">By <a th:text="${blogs.user.userName}"></a></span>
               <span th:text="${#dates.format(blogs.postTime, 'dd-MM-yyyy')}"></span>
             </div>
           </div>
@@ -367,9 +367,6 @@
 
     let comment = {
       content: content,
-      user: {
-        id: 13
-      },
       blog: {
         id: getBlogId()
       },
@@ -388,13 +385,14 @@
       success: successHandler
     });
 
+
     event.preventDefault();
   }
 
   function successHandler() {
     let blogId = getBlogId();
     $.get({
-      url: `http://localhost:8080/api/comments/${blogId}`,
+      url: "http://localhost:8080/api/comments/"+ blogId,
     },function (response) {
       showComments(response);
     });
