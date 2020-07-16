@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -52,7 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("userName").passwordParameter("password")
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/Access_Denied")
-                .and().formLogin().loginPage("/login");
+                .and().formLogin().loginPage("/login")
+                .and().logout().logoutRequestMatcher((new AntPathRequestMatcher("/logout")));
     }
 
     PersistentTokenRepository persistentTokenRepository(){

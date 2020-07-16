@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1998/xhtml">
 <head>
     <title>Mini Blog</title>
     <meta charset="utf-8">
@@ -50,11 +50,14 @@
                     <nav class="site-navigation" role="navigation">
                         <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
                             <li><a href="category.html">Home</a></li>
-                            <li><a href="category.html">Politics</a></li>
+                            <li><a th:href="@{/createBlog}">New Post</a></li>
                             <li><a href="category.html">Tech</a></li>
                             <li><a href="category.html">Entertainment</a></li>
-                            <li><a href="category.html">Travel</a></li>
-                            <li><a href="category.html">Sports</a></li>
+<!--                            <li><a href="category.html">Travel</a></li>-->
+<!--                            <li><a href="category.html">Sports</a></li>-->
+                            <li><a href="user">Login</a></li>
+                            <li><div sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a>
+                            </div></a></li>
                             <li class="d-none d-lg-inline-block"><a class="js-search-toggle"><span class="icon-search"></span></a></li>
                         </ul>
                     </nav>

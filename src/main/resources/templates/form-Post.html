@@ -33,6 +33,7 @@
                         <input type="hidden" th:field="*{id}">
                     </th:block>
                     <div class="form-group">
+                        <input type="hidden" th:field="*{user.id}"/>
                         <input type="text" class="form-control" th:field="*{title}" placeholder="Title">
                     </div>
                     <textarea id="editor" cols="50" rows="20" placeholder="Submit your text post here..." th:field="*{content}"></textarea>

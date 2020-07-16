@@ -42,12 +42,6 @@ public class SecurityController {
     }
 
 
-//    @GetMapping(value = {"/", "/home"})
-//    public String Homepage(Model model){
-//        model.addAttribute("user", getPrincipal());
-//        return "welcome";
-//    }
-
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
@@ -60,10 +54,10 @@ public class SecurityController {
         return "accessDenied";
     }
 
-    @RequestMapping(value = "/dba", method = RequestMethod.GET)
-    public String dbaPage(ModelMap model) {
-        model.addAttribute("user", getPrincipal());
-        return "dba";
-    }
+//    @RequestMapping(value = "/dba", method = RequestMethod.GET)
+//    public String dbaPage(ModelMap model) {
+//        model.addAttribute("user", getPrincipal());
+//        return "dba";
+//    }
 
 }

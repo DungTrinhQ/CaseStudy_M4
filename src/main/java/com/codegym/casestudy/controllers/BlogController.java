@@ -2,14 +2,17 @@ package com.codegym.casestudy.controllers;
 
 import com.codegym.casestudy.models.Blog;
 import com.codegym.casestudy.models.Category;
+import com.codegym.casestudy.models.User;
 import com.codegym.casestudy.service.IBlogService;
 import com.codegym.casestudy.service.ICategoryService;
+import com.codegym.casestudy.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -18,6 +21,8 @@ public class BlogController {
     private IBlogService blogService;
     @Autowired
     private ICategoryService categoryService;
+    @Autowired
+    private IUserService userService;
 
     @GetMapping("/blog/{id}")
     public ModelAndView getBlogDetail(@PathVariable Long id) {
@@ -39,7 +44,14 @@ public class BlogController {
     }
 
     @PostMapping("/save-Blog")
-    public ModelAndView save(@ModelAttribute("blog") Blog blog) {
+    public ModelAndView save(@ModelAttribute("blog") Blog blog, Principal principal) {
+        String userName = "";
+        User user = null;
+        if (principal != null) {
+            userName = principal.getName();
+            user = userService.findUserByUsername(userName);
+        }
+        blog.setUser(user);
         blogService.createBlog(blog);
         ModelAndView mv = new ModelAndView("form-Post");
         mv.addObject("message","New Post created successfully");
