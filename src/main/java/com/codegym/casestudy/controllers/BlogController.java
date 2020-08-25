@@ -2,13 +2,16 @@ package com.codegym.casestudy.controllers;
 
 import com.codegym.casestudy.models.Blog;
 import com.codegym.casestudy.models.Category;
+import com.codegym.casestudy.models.Comment;
 import com.codegym.casestudy.models.User;
 import com.codegym.casestudy.service.IBlogService;
 import com.codegym.casestudy.service.ICategoryService;
+import com.codegym.casestudy.service.ICommentService;
 import com.codegym.casestudy.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,6 +19,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
+@RequestMapping("/blog")
 public class BlogController {
     @Autowired
     private IBlogService blogService;
@@ -23,27 +27,28 @@ public class BlogController {
     private ICategoryService categoryService;
     @Autowired
     private IUserService userService;
-
-    @GetMapping("/blog/{id}")
+    @Autowired
+    private ICommentService commentService;
+    @GetMapping("/{id}")
     public ModelAndView getBlogDetail(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("blogDetail");
         mv.addObject("blogs",blogService.findOne(id));
         return mv;
     }
 
-    @GetMapping("/blog/blogCategory")
+    @GetMapping("/blogCategory")
     public String getCategoryBlog() {
         return "category";
     }
 
-    @GetMapping("/createBlog")
+    @GetMapping("/create")
     public ModelAndView createBlog() {
         ModelAndView mv = new ModelAndView("form-Post");
         mv.addObject("blog", new Blog());
         return mv;
     }
 
-    @PostMapping("/save-Blog")
+    @PostMapping("/save")
     public ModelAndView save(@ModelAttribute("blog") Blog blog, Principal principal) {
         String userName = "";
         User user = null;
@@ -58,7 +63,7 @@ public class BlogController {
         return mv;
     }
 
-    @GetMapping("/blog/searchBlog")
+    @GetMapping("/search")
     public ModelAndView getSearch(@ModelAttribute("keyWord") String keyWord) {
         ModelAndView mv = new ModelAndView("home");
         Iterable<Blog> blogs = (Iterable) blogService.findAllByTitleLike(keyWord);
@@ -66,7 +71,7 @@ public class BlogController {
         return mv;
     }
 
-    @GetMapping("/blog/edit/{id}")
+    @GetMapping("/edit/{id}")
     public ModelAndView getEditBlog(@PathVariable Long id) {
         Blog blog = blogService.findOne(id);
         ModelAndView mv = new ModelAndView("form-Post");
@@ -74,11 +79,16 @@ public class BlogController {
         return mv;
     }
 
-    @GetMapping("/blog/category/{category_id}")
+    @GetMapping("/category/{category_id}")
     public ModelAndView getSearchBlogByCategory(@PathVariable("category_id") Long category_id) {
         ModelAndView mv = new ModelAndView("home");
         Iterable<Blog> blogs = (Iterable) blogService.findAllByCategoryContainingOrderByPostTimeDesc(category_id);
         mv.addObject("blogs", blogs);
         return mv;
+    }
+    @GetMapping("/delete/{id}")
+    public String deleteBlog(@PathVariable Long id) {
+        blogService.delete(id);
+        return "redirect:/";
     }
 }

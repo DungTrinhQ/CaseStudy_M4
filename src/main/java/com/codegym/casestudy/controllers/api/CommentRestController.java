@@ -1,5 +1,6 @@
-package com.codegym.casestudy.controllers;
+package com.codegym.casestudy.controllers.api;
 
+import com.codegym.casestudy.models.Blog;
 import com.codegym.casestudy.models.Comment;
 import com.codegym.casestudy.models.User;
 import com.codegym.casestudy.service.IBlogService;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
+@RequestMapping("/api/comments")
 public class CommentRestController {
     @Autowired
     private ICommentService iCommentService;
@@ -26,11 +28,11 @@ public class CommentRestController {
     @Autowired
     private IBlogService blogService;
 
-    @GetMapping("/api/comments")
+    @GetMapping("/")
     public List<Comment> getAllComment(){return (List<Comment>) iCommentService.findAll();}
 
-    @PostMapping(value = "/api/comments",produces = MediaType.APPLICATION_JSON_VALUE, consumes = {MediaType.APPLICATION_JSON_VALUE,"application/x-www-form-urlencoded"})
-    public Comment createComment(@RequestBody Comment comment,Principal principal){
+    @PostMapping(value = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE, consumes = {MediaType.APPLICATION_JSON_VALUE,"application/x-www-form-urlencoded"})
+    public Comment createComment(@PathVariable Long id ,@RequestBody Comment comment,Principal principal){
         String userName = "";
         User user = null;
         if (principal != null) {
@@ -38,10 +40,12 @@ public class CommentRestController {
             user = userService.findUserByUsername(userName);
         }
         comment.setUser(user);
+        Blog blog = blogService.findOne(id);
+        comment.setBlog(blog);
         return iCommentService.save(comment);
     }
 
-    @GetMapping(value = "/api/comments/{blogId}")
+    @GetMapping(value = "/{blogId}")
     public ResponseEntity<List<Comment>> getAllComment(@PathVariable  Long blogId){
         List<Comment> comments = iCommentService.findAllByBlogId(blogId);
         return new ResponseEntity<>(comments, HttpStatus.OK);

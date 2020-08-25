@@ -9,10 +9,12 @@ import java.util.List;
 @Data
 public class Tag {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String keyWord;
 
+    @ManyToMany(mappedBy = "tags")
+    private List<Blog> blogs;
 //    @ManyToMany(cascade = CascadeType.ALL)
 ////    @JoinTable(name = "blog_tag")
 //    private List<Blog> blogs;

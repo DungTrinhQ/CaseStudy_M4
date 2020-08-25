@@ -8,7 +8,7 @@ import java.util.List;
 public interface IBlogService {
     List<Blog> findAll();
     Blog findOne(Long id);
-    Blog createBlog(Blog blog);
+    void createBlog(Blog blog);
     Blog delete(Long id);
     Iterable<Blog> findAllByDateDesc();
     Iterable<Blog> findAllByTitleLike(String keyWord);

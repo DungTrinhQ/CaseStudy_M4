@@ -95,7 +95,7 @@
         <div class="col-md-12 col-lg-8 main-content">
 
           <div class="post-content-body">
-            <p th:text="${blogs.content}"></p>
+            <p th:utext="${blogs.content}"></p>
             <div class="row mb-5 mt-5">
               <div class="col-md-12 mb-4">
                 <img src="/assets/images/img_1.jpg" alt="Image placeholder" class="img-fluid rounded">
@@ -107,56 +107,17 @@
                 <img src="/assets/images/img_3.jpg" alt="Image placeholder" class="img-fluid rounded">
               </div>
             </div>
-            <!--            <p>Quibusdam autem, quas molestias recusandae aperiam molestiae modi qui ipsam vel. Placeat tenetur veritatis tempore quos impedit dicta, error autem, quae sint inventore ipsa quidem. Quo voluptate quisquam reiciendis, minus, animi minima eum officia doloremque repellat eos, odio doloribus cum.</p>-->
-            <!--            <p>Temporibus quo dolore veritatis doloribus delectus dolores perspiciatis recusandae ducimus, nisi quod, incidunt ut quaerat, magnam cupiditate. Aut, laboriosam magnam, nobis dolore fugiat impedit necessitatibus nisi cupiditate, quas repellat itaque molestias sit libero voluptas eveniet omnis illo ullam dolorem minima.</p>-->
-            <!--            <p>Porro amet accusantium libero fugit totam, deserunt ipsa, dolorem, vero expedita illo similique saepe nisi deleniti. Cumque, laboriosam, porro! Facilis voluptatem sequi nulla quidem, provident eius quos pariatur maxime sapiente illo nostrum quibusdam aliquid fugiat! Earum quod fuga id officia.</p>-->
-            <!--            <p>Illo magnam at dolore ad enim fugiat ut maxime facilis autem, nulla cumque quis commodi eos nisi unde soluta, ipsa eius aspernatur sint atque! Nihil, eveniet illo ea, mollitia fuga accusamus dolor dolorem perspiciatis rerum hic, consectetur error rem aspernatur!</p>-->
 
-            <!--            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus magni explicabo id molestiae, minima quas assumenda consectetur, nobis neque rem, incidunt quam tempore perferendis provident obcaecati sapiente, animi vel expedita omnis quae ipsa! Obcaecati eligendi sed odio labore vero reiciendis facere accusamus molestias eaque impedit, consequuntur quae fuga vitae fugit?</p>-->
           </div>
 
-          <!--            -->
-          <!--            <div class="pt-5">-->
-          <!--              <p>Categories:  <a href="#" th:text="${blogs.category.theme}"></a> Tags: <a href="#">#manila</a>, <a href="#">#asia</a></p>-->
-          <!--            </div>-->
-          <!--            <div class="pt-5">-->
-          <!--              <h3 class="mb-5">6 Comments</h3>-->
-          <!--              <ul class="comment-list" th>-->
-          <!--                <li class="comment">-->
-          <!--                  <div class="vcard">-->
-          <!--                    <img src="/assets/images/person_1.jpg" alt="Image placeholder">-->
-          <!--                  </div>-->
-          <!--                  <div class="comment-body">-->
-          <!--                    <h3>Jean Doe</h3>-->
-          <!--                    <div class="meta">January 9, 2018 at 2:21pm</div>-->
-          <!--                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>-->
-          <!--                    <p><a href="#" class="reply rounded">Reply</a></p>-->
-          <!--                  </div>-->
-          <!--                </li>-->
-          <!--              </ul>-->
-          <!-- END comment-list -->
-          <!--              <div class="comment-form-wrap pt-2">-->
-          <!--                <h3 class="mb-5">Comment</h3>-->
-          <!--                <form action="" class="p-3 bg-light">-->
-          <!--                  <div class="form-group">-->
-          <!--                    <label for="message"></label>-->
-          <!--                    <textarea name="" id="message" cols="30" rows="8" class="form-control" placeholder="Bạn muốn nói gì..."></textarea>-->
-          <!--                  </div>-->
-          <!--                  <div class="form-group">-->
-          <!--                    <input type="button" value="Post Comment" class="btn btn-primary">-->
-          <!--                  </div>-->
-          <!--                </form>-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </div>-->
           <a th:href="@{/blog/edit/__${blogs.id}__}" class="btn btn-secondary">Sửa</a>
-          <a href="#" class="btn btn-danger">Xoá</a>
+          <a th:href="@{/blog/delete-Blog/__${blogs.id}__}" class="btn btn-danger">Xoá</a>
 
           <div class="pt-5">
             <h3 class="mb-5" id="commentTotal">Comments</h3>
             <ul class="comment-list" id="CommentLists">
             </ul>
-             END comment-list
+
 
             <div class="comment-form-wrap pt-2">
               <h3 class="mb-5">Comment</h3>
@@ -362,24 +323,24 @@
   let blogId = '';
   function addComment() {
     let content = document.getElementById("message").value;
-    //let user_id = document.getElementById("user_Id").value;
-    //let blog_id = document.getElementById("blog_id").value;
+    // let user_id = document.getElementById("user_Id").value;
+    let blog_id = getBlogId();
 
     let comment = {
       content: content,
-      blog: {
-        id: getBlogId()
-      },
+      // blog: {
+      //   id: getBlogId()
+      // },
     };
     //if(user_id== null || user_id==undefined){
-    //chuyen huong trnag login hoặc báo lỗi
+    //chuyen huong trang login hoặc báo lỗi
     //}
     $.ajax({
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      url: 'http://localhost:8080/api/comments/',
+      url: 'http://localhost:8080/api/comments/' + blog_id,
       type: 'POST',
       data: JSON.stringify(comment),
       success: successHandler
@@ -415,7 +376,7 @@
                     <img src="/assets/images/person_1.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
-                    <h3>${comment.id}</h3> // name user
+                    <h3>${comment.user.username}</h3> // name user
                     <div class="meta">${comment.time}</div>
                     <p>${comment.content}</p>
                     <p><a href="#" class="reply rounded">Reply</a></p>

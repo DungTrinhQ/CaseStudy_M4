@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 public class Blog {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String title;
@@ -35,6 +35,10 @@ public class Blog {
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "blog_tag",
+            joinColumns = {@JoinColumn(name = "blog_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     private List<Tag> tags;
-
+    @OneToMany(mappedBy = "blog")
+    private List<Comment> commentList;
 }
