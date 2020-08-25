@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
-@RequestMapping("/blog")
+@RequestMapping("blog")
 public class BlogController {
     @Autowired
     private IBlogService blogService;
@@ -29,26 +28,26 @@ public class BlogController {
     private IUserService userService;
     @Autowired
     private ICommentService commentService;
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ModelAndView getBlogDetail(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("blogDetail");
         mv.addObject("blogs",blogService.findOne(id));
         return mv;
     }
 
-    @GetMapping("/blogCategory")
+    @GetMapping("category")
     public String getCategoryBlog() {
         return "category";
     }
 
-    @GetMapping("/create")
+    @GetMapping("create")
     public ModelAndView createBlog() {
         ModelAndView mv = new ModelAndView("form-Post");
         mv.addObject("blog", new Blog());
         return mv;
     }
 
-    @PostMapping("/save")
+    @PostMapping("save")
     public ModelAndView save(@ModelAttribute("blog") Blog blog, Principal principal) {
         String userName = "";
         User user = null;
@@ -63,7 +62,7 @@ public class BlogController {
         return mv;
     }
 
-    @GetMapping("/search")
+    @GetMapping("search")
     public ModelAndView getSearch(@ModelAttribute("keyWord") String keyWord) {
         ModelAndView mv = new ModelAndView("home");
         Iterable<Blog> blogs = (Iterable) blogService.findAllByTitleLike(keyWord);
@@ -71,7 +70,7 @@ public class BlogController {
         return mv;
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("edit/{id}")
     public ModelAndView getEditBlog(@PathVariable Long id) {
         Blog blog = blogService.findOne(id);
         ModelAndView mv = new ModelAndView("form-Post");
@@ -79,14 +78,14 @@ public class BlogController {
         return mv;
     }
 
-    @GetMapping("/category/{category_id}")
+    @GetMapping("category/{category_id}")
     public ModelAndView getSearchBlogByCategory(@PathVariable("category_id") Long category_id) {
         ModelAndView mv = new ModelAndView("home");
         Iterable<Blog> blogs = (Iterable) blogService.findAllByCategoryContainingOrderByPostTimeDesc(category_id);
         mv.addObject("blogs", blogs);
         return mv;
     }
-    @GetMapping("/delete/{id}")
+    @GetMapping("delete/{id}")
     public String deleteBlog(@PathVariable Long id) {
         blogService.delete(id);
         return "redirect:/";

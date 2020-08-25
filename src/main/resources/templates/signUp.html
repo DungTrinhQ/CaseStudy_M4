@@ -80,7 +80,7 @@
                     <th:block th:if="${message}">
                         <p th:text="${message}" style="color: cyan"></p>
                     </th:block>
-                    <form th:action="@{/save-User}" class="p-5 bg-white" th:object="${user}" method="post">
+                    <form th:action="@{/user/save}" class="p-5 bg-white" th:object="${user}" method="post">
                         <div class="row form-group">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label class="text-black" for="firstName">First Name</label>

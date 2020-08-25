@@ -28,7 +28,7 @@
                 <th:block th:if="${message}">
                     <p th:text="${message}" style="color: cyan"></p>
                 </th:block>
-                <form method="post" th:action="@{/save-Blog}" th:object="${blog}">
+                <form method="post" th:action="@{/blog/save}" th:object="${blog}">
                     <th:block th:if="${blog.id != null}">
                         <input type="hidden" th:field="*{id}">
                     </th:block>

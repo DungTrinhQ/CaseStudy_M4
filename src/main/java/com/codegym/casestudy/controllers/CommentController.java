@@ -14,6 +14,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
+@RequestMapping("/comment")
 public class CommentController {
 
     @Autowired
@@ -22,7 +23,7 @@ public class CommentController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping("/comments")
+    @GetMapping("/list")
     public ModelAndView getCommnetsByBlogId() {
         ModelAndView mv = new ModelAndView("Comment");
         List<Comment> comments = (List<Comment>) iCommentService.findAll();
@@ -30,7 +31,7 @@ public class CommentController {
         return mv;
     }
 
-    @RequestMapping(value = "/createNewComment", method = RequestMethod.POST,
+    @RequestMapping(value = "/create", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Comment createComment(@RequestBody Comment comment, Principal principal) {

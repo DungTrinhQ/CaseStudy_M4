@@ -25,12 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService customUserDetailsService;
 
-    @Autowired
-    CustomSuccessHandler customSuccessHandler;
-
-    @Autowired
-    private DataSource dataSource;
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -46,20 +40,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
-                .antMatchers("/blog/**").access("hasRole('ADMIN')")
-                .antMatchers("/user/**").access("hasAnyRole('ADMIN','USER')")
-                .and().formLogin().successHandler(customSuccessHandler)
-                .usernameParameter("userName").passwordParameter("password")
-                .and().csrf().disable()
-                .exceptionHandling().accessDeniedPage("/Access_Denied")
+                .antMatchers("/", "/blog","/user").permitAll()
+                .and().authorizeRequests().antMatchers("/blog/delete/**","/blog/edit/**","/blog/create","/comment/create/**")
+                .hasAnyRole("ADMIN","USER")
+                .and().authorizeRequests().antMatchers("/user/**")
+                .hasAnyRole("ADMIN")
                 .and().formLogin().loginPage("/login")
-                .and().logout().logoutRequestMatcher((new AntPathRequestMatcher("/logout")));
+                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .and().exceptionHandling().accessDeniedPage("/403")
+                .and().csrf().disable()
+                ;
     }
 
-    PersistentTokenRepository persistentTokenRepository(){
-        JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();
-        tokenRepositoryImpl.setDataSource(dataSource);
-        return tokenRepositoryImpl;
-    }
 }
